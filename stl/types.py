@@ -1,19 +1,47 @@
 
 
 class Solid(object):
+    """
+    A solid object; the root element of an STL file.
+    """
+
+    #: The name given to the object by the ASCII file header.
+    #: Always ``None`` for objects read from binary files, since the binary
+    #: format has no such concept.
+    name = None
+
+    #: :py:class:`list` of :py:class:`stl.Facet` objects representing the
+    #: facets (triangles) that make up the exterior surface of this object.
+    facets = []
 
     def __init__(self, name=None, facets=None):
         self.name = name
         self.facets = facets if facets is not None else []
 
     def add_facet(self, *args, **kwargs):
+        """
+        Append a new facet to the object. Takes the same arguments as the
+        :py:class:`stl.Facet` type.
+        """
         self.facets.append(Facet(*args, **kwargs))
 
     def write_binary(self, file):
+        """
+        Write this object to a file in STL *binary* format.
+
+        ``file`` must be a file-like object (supporting a ``write`` method),
+        to which the data will be written.
+        """
         from stl.binary import write
         write(self, file)
 
     def write_ascii(self, file):
+        """
+        Write this object to a file in STL *ascii* format.
+
+        ``file`` must be a file-like object (supporting a ``write`` method),
+        to which the data will be written.
+        """
         from stl.ascii import write
         write(self, file)
 
@@ -41,6 +69,16 @@ class Solid(object):
 
 
 class Facet(object):
+    """
+    A facet (triangle) from a :py:class:`stl.Solid`.
+    """
+
+    #: The 'normal' vector of the facet, as a :py:class:`stl.Vector3d`.
+    normal = None
+
+    #: 3-element sequence of :py:class:`stl.Vector3d` representing the
+    #: facet's three vertices, in order.
+    vertices = None
 
     def __init__(self, normal, vertices):
         self.normal = Vector3d(*normal)
@@ -70,6 +108,15 @@ class Facet(object):
 
 
 class Vector3d(tuple):
+    """
+    Three-dimensional vector.
+
+    Used to represent both normals and vertices of :py:class:`stl.Facet`
+    objects.
+
+    This is a subtype of :py:class:`tuple`, so can also be treated like a
+    three-element tuple in (``x``, ``y``, ``z``) order.
+    """
 
     def __new__(cls, x, y, z):
         return tuple.__new__(cls, (x, y, z))
@@ -79,6 +126,10 @@ class Vector3d(tuple):
 
     @property
     def x(self):
+        """
+        The X value of the vector, which most applications interpret
+        as the left-right axis.
+        """
         return self[0]
 
     @x.setter
@@ -87,6 +138,10 @@ class Vector3d(tuple):
 
     @property
     def y(self):
+        """
+        The Y value of the vector, which most applications interpret
+        as the in-out axis.
+        """
         return self[1]
 
     @y.setter
@@ -95,6 +150,10 @@ class Vector3d(tuple):
 
     @property
     def z(self):
+        """
+        The Z value of the vector, which most applications interpret
+        as the up-down axis.
+        """
         return self[2]
 
     @z.setter
