@@ -11,11 +11,19 @@ class Solid(object):
 
     def __eq__(self, other):
         if type(other) is Solid:
-            return (
-                self.name == other.name and self.facets == other.facets
-            )
+            if self.name != other.name:
+                return False
+            if len(self.facets) != len(other.facets):
+                return False
+            for i, self_facet in enumerate(self.facets):
+                if self_facet != other.facets[i]:
+                    return False
+            return True
         else:
             return False
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
 
     def __repr__(self):
         return '<stl.types.Solid name=%r, facets=%r>' % (
@@ -40,6 +48,9 @@ class Facet(object):
             )
         else:
             return False
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
 
     def __repr__(self):
         return '<stl.types.Facet normal=%r, vertices=%r>' % (
