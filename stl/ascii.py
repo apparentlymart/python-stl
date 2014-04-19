@@ -50,7 +50,7 @@ class Scanner(object):
 
             if b == '':
                 return None
-            elif b.isalpha():
+            elif b.isalpha() or b == '_':
                 self.peeked = self._read_keyword()
             elif b.isdigit() or b == '.' or b == '-':
                 self.peeked = self._read_number()
@@ -108,7 +108,7 @@ class Scanner(object):
         start_col = self.peeked_col
         while True:
             b = self.peek_byte()
-            if b.isalpha():
+            if b.isalpha() or b == '_' or b.isdigit():
                 ret_bytes.append(self.get_byte())
             else:
                 break

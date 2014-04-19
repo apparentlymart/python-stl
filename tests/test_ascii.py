@@ -50,11 +50,11 @@ class TestScanner(unittest.TestCase):
             self._get_tokens("--2")
 
     def test_keywords(self):
-        tokens = self._get_tokens("hello world a\nb c")
+        tokens = self._get_tokens("hello world a\nb c _d e_f g2")
         self.assertEqual(
             tokens,
             [
-                'hello', 'world', 'a', 'b', 'c',
+                'hello', 'world', 'a', 'b', 'c', '_d', 'e_f', 'g2',
             ],
         )
 
