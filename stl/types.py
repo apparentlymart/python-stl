@@ -35,8 +35,10 @@ class Solid(object):
 class Facet(object):
 
     def __init__(self, normal, vertices):
-        self.normal = normal
-        self.vertices = tuple(vertices)
+        self.normal = Vector3d(*normal)
+        self.vertices = tuple(
+            Vector3d(*x) for x in vertices
+        )
         if len(self.vertices) != 3:
             raise ValueError('Must pass exactly three vertices')
 
