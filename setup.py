@@ -9,6 +9,7 @@ setup(
     version="dev",
     author="Martin Atkins",
     author_email="mart@degeneration.co.uk",
+    description="Read and write STL 3D geometry files in both the ASCII and the binary flavor",
 
     packages=['stl'],
     install_requires=[
