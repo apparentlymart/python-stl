@@ -2,9 +2,9 @@
 
 class Solid(object):
 
-    def __init__(self, name=None, facets=[]):
+    def __init__(self, name=None, facets=None):
         self.name = name
-        self.facets = facets
+        self.facets = facets if facets is not None else []
 
     def add_facet(self, *args, **kwargs):
         self.facets.append(Facet(*args, **kwargs))
