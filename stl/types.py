@@ -68,6 +68,7 @@ class Facet(object):
             self.vertices,
         )
 
+
 class Vector3d(tuple):
 
     def __new__(cls, x, y, z):

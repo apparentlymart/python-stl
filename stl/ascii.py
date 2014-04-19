@@ -1,14 +1,18 @@
 
 from stl.types import *
 
+
 class KeywordToken(str):
     pass
+
 
 class NumberToken(float):
     pass
 
+
 def _token_type_name(token_type):
-    if token_type is type(None):
+    NoneType = type(None)
+    if token_type is NoneType:
         return 'end of file'
     elif token_type is KeywordToken:
         return 'keyword'
@@ -16,6 +20,7 @@ def _token_type_name(token_type):
         return 'number'
     else:
         return 'unknown'
+
 
 class Scanner(object):
 
@@ -148,7 +153,6 @@ class Scanner(object):
 
 class SyntaxError(ValueError):
     pass
-
 
 
 def parse(file):

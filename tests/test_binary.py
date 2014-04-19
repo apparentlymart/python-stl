@@ -39,36 +39,36 @@ class TestParser(unittest.TestCase):
     def test_valid(self):
         solid = self._parse_str(
             EMPTY_HEADER +
-            '\x02\x00\x00\x00' # two facets
+            '\x02\x00\x00\x00'  # two facets
             # first facet
-            '\x00\x00\x80\x3f' # normal x = 1.0
-            '\x00\x00\x00\x40' # normal y = 2.0
-            '\x00\x00\x40\x40' # normal z = 3.0
-            '\x00\x00\x80\x40' # vertex x = 4.0
-            '\x00\x00\xa0\x40' # vertex y = 5.0
-            '\x00\x00\xc0\x40' # vertex z = 6.0
-            '\x00\x00\xe0\x40' # vertex x = 7.0
-            '\x00\x00\x00\x41' # vertex y = 8.0
-            '\x00\x00\x10\x41' # vertex z = 9.0
-            '\x00\x00\x20\x41' # vertex x = 10.0
-            '\x00\x00\x30\x41' # vertex y = 11.0
-            '\x00\x00\x40\x41' # vertex z = 12.0
-            '\x04\x00'         # four attribute bytes
-            '\x00\x00\x80\x7f' # dummy attribute bytes (float Infinity)
+            '\x00\x00\x80\x3f'  # normal x = 1.0
+            '\x00\x00\x00\x40'  # normal y = 2.0
+            '\x00\x00\x40\x40'  # normal z = 3.0
+            '\x00\x00\x80\x40'  # vertex x = 4.0
+            '\x00\x00\xa0\x40'  # vertex y = 5.0
+            '\x00\x00\xc0\x40'  # vertex z = 6.0
+            '\x00\x00\xe0\x40'  # vertex x = 7.0
+            '\x00\x00\x00\x41'  # vertex y = 8.0
+            '\x00\x00\x10\x41'  # vertex z = 9.0
+            '\x00\x00\x20\x41'  # vertex x = 10.0
+            '\x00\x00\x30\x41'  # vertex y = 11.0
+            '\x00\x00\x40\x41'  # vertex z = 12.0
+            '\x04\x00'          # four attribute bytes
+            '\x00\x00\x80\x7f'  # dummy attribute bytes (float Infinity)
             # second facet
-            '\x00\x00\x80\x3f' # normal x = 1.0
-            '\x00\x00\x80\x3f' # normal y = 1.0
-            '\x00\x00\x80\x3f' # normal z = 1.0
-            '\x00\x00\x80\x3f' # vertex x = 1.0
-            '\x00\x00\x80\x3f' # vertex y = 1.0
-            '\x00\x00\x80\x3f' # vertex z = 1.0
-            '\x00\x00\x80\x3f' # vertex x = 1.0
-            '\x00\x00\x80\x3f' # vertex y = 1.0
-            '\x00\x00\x80\x3f' # vertex z = 1.0
-            '\x00\x00\x80\x3f' # vertex x = 1.0
-            '\x00\x00\x80\x3f' # vertex y = 1.0
-            '\x00\x00\x80\x3f' # vertex z = 1.0
-            '\x00\x00'         # no attribute bytes
+            '\x00\x00\x80\x3f'  # normal x = 1.0
+            '\x00\x00\x80\x3f'  # normal y = 1.0
+            '\x00\x00\x80\x3f'  # normal z = 1.0
+            '\x00\x00\x80\x3f'  # vertex x = 1.0
+            '\x00\x00\x80\x3f'  # vertex y = 1.0
+            '\x00\x00\x80\x3f'  # vertex z = 1.0
+            '\x00\x00\x80\x3f'  # vertex x = 1.0
+            '\x00\x00\x80\x3f'  # vertex y = 1.0
+            '\x00\x00\x80\x3f'  # vertex z = 1.0
+            '\x00\x00\x80\x3f'  # vertex x = 1.0
+            '\x00\x00\x80\x3f'  # vertex y = 1.0
+            '\x00\x00\x80\x3f'  # vertex z = 1.0
+            '\x00\x00'          # no attribute bytes
         )
         self.assertEqual(
             solid,
@@ -94,8 +94,6 @@ class TestParser(unittest.TestCase):
                 ],
             ),
         )
-
-
 
 
 class TestWriter(unittest.TestCase):
@@ -139,33 +137,33 @@ class TestWriter(unittest.TestCase):
                 ],
             ),
             EMPTY_HEADER +
-            '\x02\x00\x00\x00' # two facets
+            '\x02\x00\x00\x00'  # two facets
             # first facet
-            '\x00\x00\x80\x3f' # normal x = 1.0
-            '\x00\x00\x00\x40' # normal y = 2.0
-            '\x00\x00\x40\x40' # normal z = 3.0
-            '\x00\x00\x80\x40' # vertex x = 4.0
-            '\x00\x00\xa0\x40' # vertex y = 5.0
-            '\x00\x00\xc0\x40' # vertex z = 6.0
-            '\x00\x00\xe0\x40' # vertex x = 7.0
-            '\x00\x00\x00\x41' # vertex y = 8.0
-            '\x00\x00\x10\x41' # vertex z = 9.0
-            '\x00\x00\x20\x41' # vertex x = 10.0
-            '\x00\x00\x30\x41' # vertex y = 11.0
-            '\x00\x00\x40\x41' # vertex z = 12.0
-            '\x00\x00'         # no attribute bytes
+            '\x00\x00\x80\x3f'  # normal x = 1.0
+            '\x00\x00\x00\x40'  # normal y = 2.0
+            '\x00\x00\x40\x40'  # normal z = 3.0
+            '\x00\x00\x80\x40'  # vertex x = 4.0
+            '\x00\x00\xa0\x40'  # vertex y = 5.0
+            '\x00\x00\xc0\x40'  # vertex z = 6.0
+            '\x00\x00\xe0\x40'  # vertex x = 7.0
+            '\x00\x00\x00\x41'  # vertex y = 8.0
+            '\x00\x00\x10\x41'  # vertex z = 9.0
+            '\x00\x00\x20\x41'  # vertex x = 10.0
+            '\x00\x00\x30\x41'  # vertex y = 11.0
+            '\x00\x00\x40\x41'  # vertex z = 12.0
+            '\x00\x00'          # no attribute bytes
             # second facet
-            '\x00\x00\x80\x3f' # normal x = 1.0
-            '\x00\x00\x80\x3f' # normal y = 1.0
-            '\x00\x00\x80\x3f' # normal z = 1.0
-            '\x00\x00\x80\x3f' # vertex x = 1.0
-            '\x00\x00\x80\x3f' # vertex y = 1.0
-            '\x00\x00\x80\x3f' # vertex z = 1.0
-            '\x00\x00\x80\x3f' # vertex x = 1.0
-            '\x00\x00\x80\x3f' # vertex y = 1.0
-            '\x00\x00\x80\x3f' # vertex z = 1.0
-            '\x00\x00\x80\x3f' # vertex x = 1.0
-            '\x00\x00\x80\x3f' # vertex y = 1.0
-            '\x00\x00\x80\x3f' # vertex z = 1.0
-            '\x00\x00'         # no attribute bytes
+            '\x00\x00\x80\x3f'  # normal x = 1.0
+            '\x00\x00\x80\x3f'  # normal y = 1.0
+            '\x00\x00\x80\x3f'  # normal z = 1.0
+            '\x00\x00\x80\x3f'  # vertex x = 1.0
+            '\x00\x00\x80\x3f'  # vertex y = 1.0
+            '\x00\x00\x80\x3f'  # vertex z = 1.0
+            '\x00\x00\x80\x3f'  # vertex x = 1.0
+            '\x00\x00\x80\x3f'  # vertex y = 1.0
+            '\x00\x00\x80\x3f'  # vertex z = 1.0
+            '\x00\x00\x80\x3f'  # vertex x = 1.0
+            '\x00\x00\x80\x3f'  # vertex y = 1.0
+            '\x00\x00\x80\x3f'  # vertex z = 1.0
+            '\x00\x00'          # no attribute bytes
         )
