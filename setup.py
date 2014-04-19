@@ -24,4 +24,9 @@ setup(
         'pep8',
     ],
     test_suite='nose.collector',
+
+    classifiers=[
+        "License :: OSI Approved :: MIT License",
+        "Intended Audience :: Developers",
+    ],
 )
