@@ -2,6 +2,8 @@
 import stl.ascii
 import stl.binary
 
+from stl.types import Solid, Facet, Vector3d
+
 
 def read_ascii_file(file):
     return stl.ascii.parse(file)
