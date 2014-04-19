@@ -228,3 +228,19 @@ def parse(file):
         )
 
     return ret
+
+
+def write(solid, file):
+    name = solid.name
+    if name is None:
+        name = "unnamed"
+
+    file.write("solid %s\n" % name)
+    for facet in solid.facets:
+        file.write("  facet normal %g %g %g\n" % facet.normal)
+        file.write("    outer loop\n")
+        for vertex in facet.vertices:
+            file.write("      vertex %g %g %g\n" % vertex)
+        file.write("    endloop\n")
+        file.write("  endfacet\n")
+    file.write("endsolid %s\n" % name)

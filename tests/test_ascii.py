@@ -1,4 +1,5 @@
 
+from StringIO import StringIO
 import unittest
 from stl.ascii import *
 
@@ -6,7 +7,6 @@ from stl.ascii import *
 class TestScanner(unittest.TestCase):
 
     def _scanner_for_str(self, string):
-        from StringIO import StringIO
         return Scanner(StringIO(string))
 
     def _get_tokens(self, string):
@@ -99,7 +99,6 @@ class TestScanner(unittest.TestCase):
 class TestParser(unittest.TestCase):
 
     def _parse_str(self, string):
-        from StringIO import StringIO
         return parse(StringIO(string))
 
     def test_empty(self):
@@ -157,4 +156,63 @@ class TestParser(unittest.TestCase):
                     ),
                 ],
             ),
+        )
+
+
+class TestWriter(unittest.TestCase):
+
+    def assertResultEqual(self, solid, expected):
+        f = StringIO('')
+        solid.write_ascii(f)
+        self.assertEqual(
+            f.getvalue(),
+            expected,
+        )
+
+    def test_empty(self):
+        self.assertResultEqual(
+            Solid(),
+            'solid unnamed\n'
+            'endsolid unnamed\n'
+        )
+
+    def test_with_facets(self):
+        self.assertResultEqual(
+            Solid(
+                name='withfacets',
+                facets=[
+                    Facet(
+                        normal=(1, 2, 3),
+                        vertices=[
+                            (4, 5, 6),
+                            (7, 8, 9),
+                            (10, 11, 12),
+                        ],
+                    ),
+                    Facet(
+                        normal=(1.1, 2.1, 3.1),
+                        vertices=[
+                            (4.1, 5.1, 6.1),
+                            (7.1, 8.1, 9.1),
+                            (10.1, 11.1, 12.1),
+                        ],
+                    ),
+                ],
+            ),
+            'solid withfacets\n'
+            '  facet normal 1 2 3\n'
+            '    outer loop\n'
+            '      vertex 4 5 6\n'
+            '      vertex 7 8 9\n'
+            '      vertex 10 11 12\n'
+            '    endloop\n'
+            '  endfacet\n'
+            '  facet normal 1.1 2.1 3.1\n'
+            '    outer loop\n'
+            '      vertex 4.1 5.1 6.1\n'
+            '      vertex 7.1 8.1 9.1\n'
+            '      vertex 10.1 11.1 12.1\n'
+            '    endloop\n'
+            '  endfacet\n'
+            'endsolid withfacets\n'
         )

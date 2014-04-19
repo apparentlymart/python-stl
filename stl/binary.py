@@ -68,3 +68,17 @@ def parse(file):
             r.read_bytes(attr_byte_count)
 
     return ret
+
+
+def write(solid, file):
+    # Empty header
+    file.write('\0' * 80)
+
+    # Number of facets
+    file.write(struct.pack('<I', len(solid.facets)))
+
+    for facet in solid.facets:
+        file.write(struct.pack('<3f', *facet.normal))
+        for vertex in facet.vertices:
+            file.write(struct.pack('<3f', *vertex))
+        file.write('\0\0')  # no attribute bytes

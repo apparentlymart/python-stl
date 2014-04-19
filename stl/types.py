@@ -9,6 +9,14 @@ class Solid(object):
     def add_facet(self, *args, **kwargs):
         self.facets.append(Facet(*args, **kwargs))
 
+    def write_binary(self, file):
+        from stl.binary import write
+        write(self, file)
+
+    def write_ascii(self, file):
+        from stl.ascii import write
+        write(self, file)
+
     def __eq__(self, other):
         if type(other) is Solid:
             if self.name != other.name:
