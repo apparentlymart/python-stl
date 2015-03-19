@@ -131,7 +131,7 @@ class Scanner(object):
         start_col = self.peeked_col
         while True:
             b = self.peek_byte()
-            if b.isdigit() or b == '.' or b == '-' or b == 'e':
+            if b.isdigit() or b == '.' or b == '+' or b == '-' or b == 'e':
                 ret_bytes.append(self.get_byte())
             else:
                 break
