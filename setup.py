@@ -6,7 +6,7 @@ except ImportError:
 
 setup(
     name="stl",
-    version="dev",
+    version="0.0.2",
     author="Martin Atkins",
     author_email="mart@degeneration.co.uk",
     description="Read and write STL 3D geometry files in both the ASCII and the binary flavor",
