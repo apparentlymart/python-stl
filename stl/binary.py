@@ -40,7 +40,8 @@ class Reader(object):
 
     def read_header(self):
         bytes = self.read_bytes(80)
-        return struct.unpack('80s', bytes)[0]
+        return struct.unpack('80s', bytes)[0].strip('\0')
+
 
 class FormatError(ValueError):
     pass
