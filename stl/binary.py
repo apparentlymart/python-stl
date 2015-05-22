@@ -38,6 +38,10 @@ class Reader(object):
         z = self.read_float()
         return Vector3d(x, y, z)
 
+    def read_header(self):
+        bytes = self.read_bytes(80)
+        return struct.unpack('80s', bytes)[0].strip('\0')
+
 
 class FormatError(ValueError):
     pass
@@ -46,10 +50,9 @@ class FormatError(ValueError):
 def parse(file):
     r = Reader(file)
 
-    ret = Solid()
+    name = r.read_header()[6:]
 
-    # Skip the header
-    r.read_bytes(80)
+    ret = Solid(name=name)
 
     num_facets = r.read_uint32()
 

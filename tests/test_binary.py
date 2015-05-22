@@ -3,8 +3,8 @@ from StringIO import StringIO
 import unittest
 from stl.binary import *
 
-
 EMPTY_HEADER = '\0' * 80
+T_HDR = '\x73\x6f\x6c\x69\x64\x20\x54\x65\x73\x74\x66\x69\x6c\x65' + ('\0'*66)
 
 
 class TestParser(unittest.TestCase):
@@ -18,12 +18,12 @@ class TestParser(unittest.TestCase):
 
     def test_no_facets(self):
         solid = self._parse_str(
-            EMPTY_HEADER + '\0\0\0\0'
+            T_HDR + '\0\0\0\0'
         )
         self.assertEqual(
             solid,
             Solid(
-                name=None,
+                name='Testfile',
                 facets=[],
             ),
         )
@@ -33,12 +33,12 @@ class TestParser(unittest.TestCase):
             # Declared that we have two facets but we
             # actually have none.
             self._parse_str(
-                EMPTY_HEADER + '\x02\x00\x00\x00'
+                T_HDR + '\x02\x00\x00\x00'
             )
 
     def test_valid(self):
         solid = self._parse_str(
-            EMPTY_HEADER +
+            T_HDR +
             '\x02\x00\x00\x00'  # two facets
             # first facet
             '\x00\x00\x80\x3f'  # normal x = 1.0
@@ -73,7 +73,7 @@ class TestParser(unittest.TestCase):
         self.assertEqual(
             solid,
             Solid(
-                name=None,
+                name='Testfile',
                 facets=[
                     Facet(
                         normal=Vector3d(1.0, 2.0, 3.0),

@@ -5,9 +5,7 @@ class Solid(object):
     A solid object; the root element of an STL file.
     """
 
-    #: The name given to the object by the ASCII file header.
-    #: Always ``None`` for objects read from binary files, since the binary
-    #: format has no such concept.
+    #: The name given to the object by the STL file header.
     name = None
 
     #: :py:class:`list` of :py:class:`stl.Facet` objects representing the
