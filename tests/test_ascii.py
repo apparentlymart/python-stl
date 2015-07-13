@@ -23,11 +23,11 @@ class TestScanner(unittest.TestCase):
         return tokens
 
     def test_numbers(self):
-        tokens = self._get_tokens("1 0.1 -0.1 1e2\n1.2e2 1.2e-2 1.2e+2")
+        tokens = self._get_tokens("1 0.1 -0.1 1e2\n1.2e2 1.2e-2 1.2e+2 1.2E+2")
         self.assertEqual(
             tokens,
             [
-                1, 0.1, -0.1, 100, 120, 0.012, 120.0,
+                1, 0.1, -0.1, 100, 120, 0.012, 120.0, 120.0,
             ],
         )
 
