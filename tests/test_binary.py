@@ -82,6 +82,7 @@ class TestParser(unittest.TestCase):
                             Vector3d(7.0, 8.0, 9.0),
                             Vector3d(10.0, 11.0, 12.0),
                         ),
+                        attributes='\x00\x00\x80\x7f',
                     ),
                     Facet(
                         normal=Vector3d(1.0, 1.0, 1.0),
@@ -90,6 +91,7 @@ class TestParser(unittest.TestCase):
                             Vector3d(1.0, 1.0, 1.0),
                             Vector3d(1.0, 1.0, 1.0),
                         ),
+                        attributes=None,
                     ),
                 ],
             ),
@@ -125,6 +127,7 @@ class TestWriter(unittest.TestCase):
                             Vector3d(7.0, 8.0, 9.0),
                             Vector3d(10.0, 11.0, 12.0),
                         ),
+                        attributes=None,
                     ),
                     Facet(
                         normal=Vector3d(1.0, 1.0, 1.0),
@@ -133,6 +136,7 @@ class TestWriter(unittest.TestCase):
                             Vector3d(1.0, 1.0, 1.0),
                             Vector3d(1.0, 1.0, 1.0),
                         ),
+                        attributes=None,
                     ),
                 ],
             ),

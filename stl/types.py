@@ -71,6 +71,16 @@ class Facet(object):
     A facet (triangle) from a :py:class:`stl.Solid`.
     """
 
+    #: Raw binary attribute bytes. According to the STL spec these are unused
+    #: and thus this should always be empty, but some modeling software
+    #: encodes non-standard data in here which callers may wish to access.
+    #:
+    #: At present these attribute bytes are populated only when reading binary
+    #: STL files (since ASCII STL files have no place for this data) *and*
+    #: they are ignored when *writing* a binary STL file, so round-tripping
+    #: a file through this library will lose the non-standard attribute data.
+    attributes = None
+
     #: The 'normal' vector of the facet, as a :py:class:`stl.Vector3d`.
     normal = None
 
@@ -78,7 +88,7 @@ class Facet(object):
     #: facet's three vertices, in order.
     vertices = None
 
-    def __init__(self, normal, vertices):
+    def __init__(self, normal, vertices, attributes=None):
         self.normal = Vector3d(*normal)
         self.vertices = tuple(
             Vector3d(*x) for x in vertices
