@@ -1,3 +1,4 @@
+import math
 
 
 class Solid(object):
@@ -22,6 +23,17 @@ class Solid(object):
         :py:class:`stl.Facet` type.
         """
         self.facets.append(Facet(*args, **kwargs))
+
+    @property
+    def surface_area(self):
+        """
+        The sum of the areas of all facets in the object.
+        """
+        return reduce(
+            lambda accum, facet: accum + facet.area,
+            self.facets,
+            0.0,
+        )
 
     def write_binary(self, file):
         """
@@ -93,6 +105,7 @@ class Facet(object):
         self.vertices = tuple(
             Vector3d(*x) for x in vertices
         )
+
         if len(self.vertices) != 3:
             raise ValueError('Must pass exactly three vertices')
 
@@ -109,10 +122,65 @@ class Facet(object):
         return not self.__eq__(other)
 
     def __repr__(self):
-        return '<stl.types.Facet normal=%r, vertices=%r>' % (
+        return '<stl.types.Facet normal=%r, vertices=%r, area=%r>' % (
             self.normal,
             self.vertices,
+            self.area,
         )
+
+    @property
+    def a(self):
+        """
+        The length the side of the facet between vertices[0] and vertices[1]
+        """
+        return abs(
+            math.sqrt(
+                pow((self.vertices[0].x - self.vertices[1].x), 2) +
+                pow((self.vertices[0].y - self.vertices[1].y), 2) +
+                pow((self.vertices[0].z - self.vertices[1].z), 2)
+            )
+        )
+
+    @property
+    def b(self):
+        """
+        The length of the side of the facet between vertices[0] and vertices[2]
+        """
+        return abs(
+            math.sqrt(
+                pow((self.vertices[0].x - self.vertices[2].x), 2) +
+                pow((self.vertices[0].y - self.vertices[2].y), 2) +
+                pow((self.vertices[0].z - self.vertices[2].z), 2)
+            )
+        )
+
+    @property
+    def c(self):
+        """
+        The length of the side of the facet between vertices[1] and vertices[2]
+        """
+        return abs(
+            math.sqrt(
+                pow((self.vertices[1].x - self.vertices[2].x), 2) +
+                pow((self.vertices[1].y - self.vertices[2].y), 2) +
+                pow((self.vertices[1].z - self.vertices[2].z), 2)
+            )
+        )
+
+    @property
+    def perimeter(self):
+        """
+        The length of the perimeter of the facet.
+        """
+        return self.a + self.b + self.c
+
+    @property
+    def area(self):
+        """
+        The surface area of the facet, as computed by Heron's Formula.
+        """
+        p = self.perimeter / 2.0
+        return abs(math.sqrt(p * (p - self.a) * (p - self.b) * (p - self.c)))
 
 
 class Vector3d(tuple):
