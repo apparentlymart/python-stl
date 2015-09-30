@@ -239,12 +239,12 @@ def write(solid, file):
     if name is None:
         name = "unnamed"
 
-    file.write("solid %s\n" % name)
+    file.write(("solid %s\n" % name).encode())
     for facet in solid.facets:
-        file.write("  facet normal %g %g %g\n" % facet.normal)
-        file.write("    outer loop\n")
+        file.write(("  facet normal %g %g %g\n" % facet.normal).encode())
+        file.write(b"    outer loop\n")
         for vertex in facet.vertices:
-            file.write("      vertex %g %g %g\n" % vertex)
-        file.write("    endloop\n")
-        file.write("  endfacet\n")
-    file.write("endsolid %s\n" % name)
+            file.write(("      vertex %g %g %g\n" % vertex).encode())
+        file.write(b"    endloop\n")
+        file.write(b"  endfacet\n")
+    file.write(("endsolid %s\n" % name).encode())

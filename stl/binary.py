@@ -83,7 +83,7 @@ def parse(file):
 
 def write(solid, file):
     # Empty header
-    file.write('\0' * 80)
+    file.write(b'\0' * 80)
 
     # Number of facets
     file.write(struct.pack('<I', len(solid.facets)))
@@ -92,4 +92,4 @@ def write(solid, file):
         file.write(struct.pack('<3f', *facet.normal))
         for vertex in facet.vertices:
             file.write(struct.pack('<3f', *vertex))
-        file.write('\0\0')  # no attribute bytes
+        file.write(b'\0\0')  # no attribute bytes
